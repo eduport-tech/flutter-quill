@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/extensions.dart' show isDesktopApp;
 import 'package:flutter_quill/translations.dart';
@@ -29,7 +32,7 @@ class SelectImageSourceDialog extends StatelessWidget {
                 context.loc.takeAPhotoUsingYourCamera,
               ),
               leading: const Icon(Icons.camera),
-              enabled: !isDesktopApp,
+              enabled: Platform.isAndroid || Platform.isIOS|| kIsWeb,
               onTap: () => Navigator.of(context).pop(InsertImageSource.camera),
             ),
             ListTile(

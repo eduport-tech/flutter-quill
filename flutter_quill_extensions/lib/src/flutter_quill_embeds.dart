@@ -58,10 +58,10 @@ class FlutterQuillEmbeds {
         QuillEditorImageEmbedBuilder(
           configurations: imageEmbedConfigurations,
         ),
-      if (videoEmbedConfigurations != null)
-        QuillEditorVideoEmbedBuilder(
-          configurations: videoEmbedConfigurations,
-        ),
+      // if (videoEmbedConfigurations != null)
+      //   QuillEditorVideoEmbedBuilder(
+      //     configurations: videoEmbedConfigurations,
+      //   ),
       QuillEditorTableEmbedBuilder(),
     ];
   }
@@ -91,10 +91,10 @@ class FlutterQuillEmbeds {
         QuillEditorImageEmbedBuilder(
           configurations: imageEmbedConfigurations,
         ),
-      if (videoEmbedConfigurations != null)
-        QuillEditorWebVideoEmbedBuilder(
-          configurations: videoEmbedConfigurations,
-        ),
+      // if (videoEmbedConfigurations != null)
+      //   QuillEditorWebVideoEmbedBuilder(
+      //     configurations: videoEmbedConfigurations,
+      //   ),
     ];
   }
 

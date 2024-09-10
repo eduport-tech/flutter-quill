@@ -1,7 +1,6 @@
-import 'dart:io' show File;
+import 'dart:io' show File, Platform;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_quill/extensions.dart';
 
 import '../image_embed_types.dart';
 
@@ -112,7 +111,7 @@ class QuillEditorImageEmbedConfigurations {
         return;
       }
 
-      final mobile = isMobileApp;
+      final mobile = Platform.isAndroid || Platform.isIOS;
       // If the platform is not mobile, return void;
       // Since the mobile OS gives us a copy of the image
 

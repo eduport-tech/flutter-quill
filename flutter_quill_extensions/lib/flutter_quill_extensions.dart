@@ -1,7 +1,6 @@
 library flutter_quill_extensions;
 
 // ignore: implementation_imports
-import 'package:flutter_quill/src/editor_toolbar_controller_shared/clipboard/clipboard_service_provider.dart';
 import 'package:meta/meta.dart' show immutable;
 
 import 'src/editor_toolbar_controller_shared/clipboard/super_clipboard_service.dart';
@@ -59,6 +58,6 @@ class FlutterQuillExtensions {
   /// to allow `flutter_quill` package to use `super_clipboard` plugin
   /// to support rich text features, gif and images.
   static void useSuperClipboardPlugin() {
-    ClipboardServiceProvider.setInstance(SuperClipboardService());
+    // ClipboardServiceProvider.setInstance(SuperClipboardService());
   }
 }

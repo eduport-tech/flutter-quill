@@ -168,9 +168,9 @@ class ImageOptionsMenu extends StatelessWidget {
                     localizations.savedUsingLocalStorage,
                 };
 
-                if (isDesktopApp) {
-                  message = localizations.theImageHasBeenSavedAt(imageSource);
-                }
+                // if (isDesktopApp) {
+                //   message = localizations.theImageHasBeenSavedAt(imageSource);
+                // }
 
                 messenger.showSnackBar(
                   SnackBar(
