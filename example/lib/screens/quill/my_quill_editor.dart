@@ -5,12 +5,17 @@ import 'package:cached_network_image/cached_network_image.dart'
 import 'package:desktop_drop/desktop_drop.dart' show DropTarget;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/extension/src/common/extensions/controller_ext.dart';
+import 'package:flutter_quill/extension/src/common/utils/utils.dart';
+import 'package:flutter_quill/extension/src/editor/image/models/image_configurations.dart';
+import 'package:flutter_quill/extension/src/editor/image/widgets/image.dart';
+import 'package:flutter_quill/extension/src/editor/video/models/video_configurations.dart';
+import 'package:flutter_quill/extension/src/editor/video/models/youtube_video_support_mode.dart';
+import 'package:flutter_quill/extension/src/editor_toolbar_shared/shared_configurations.dart';
+import 'package:flutter_quill/extension/src/flutter_quill_embeds.dart';
 import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 // ignore: implementation_imports
-import 'package:flutter_quill_extensions/src/editor/image/widgets/image.dart'
-    show getImageProviderByImageSource, imageFileExtensions;
 import 'package:path/path.dart' as path;
 
 import '../../extensions/scaffold_messenger.dart';
