@@ -28,7 +28,7 @@ export 'element_options.dart';
 class QuillEditorConfigurations extends Equatable {
   /// Important note for the maintainers
   /// When editing this class please update the [copyWith] function too.
-  const QuillEditorConfigurations({
+  QuillEditorConfigurations({
     @Deprecated(
         'controller should be passed directly to the editor - this parameter will be removed in future versions.')
     this.controller,
@@ -297,7 +297,9 @@ class QuillEditorConfigurations extends Equatable {
           LongPressEndDetails details, TextPosition Function(Offset offset))?
       onSingleLongTapEnd;
 
-  final Iterable<EmbedBuilder>? embedBuilders;
+  Iterable<EmbedBuilder>? embedBuilders = kIsWeb
+      ? FlutterQuillEmbeds.editorWebBuilders()
+      : FlutterQuillEmbeds.editorBuilders();
   final EmbedBuilder? unknownEmbedBuilder;
   final CustomStyleBuilder? customStyleBuilder;
   final CustomRecognizerBuilder? customRecognizerBuilder;
@@ -509,11 +511,7 @@ class QuillEditorConfigurations extends Equatable {
       keyboardAppearance: keyboardAppearance ?? this.keyboardAppearance,
       scrollPhysics: scrollPhysics ?? this.scrollPhysics,
       onLaunchUrl: onLaunchUrl ?? this.onLaunchUrl,
-      embedBuilders: embedBuilders == null
-          ? kIsWeb
-              ? FlutterQuillEmbeds.editorWebBuilders()
-              : FlutterQuillEmbeds.editorBuilders()
-          : null,
+      embedBuilders: embedBuilders ?? this.embedBuilders,
       unknownEmbedBuilder: unknownEmbedBuilder ?? this.unknownEmbedBuilder,
       searchConfigurations: searchConfigurations ?? this.searchConfigurations,
       customStyleBuilder: customStyleBuilder ?? this.customStyleBuilder,

@@ -24,7 +24,7 @@ class _SimpleScreenState extends State<SimpleScreen> {
           Expanded(
             child: QuillEditor.basic(
               controller: _controller,
-              configurations: const QuillEditorConfigurations(
+              configurations: QuillEditorConfigurations(
                 padding: EdgeInsets.all(16),
               ),
             ),
