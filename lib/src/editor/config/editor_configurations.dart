@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart' show Brightness, Uint8List, immutable;
+import 'package:flutter/foundation.dart'
+    show Brightness, Uint8List, immutable, kIsWeb;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart'
     show TextCapitalization, TextInputAction, TextSelectionThemeData;
 import 'package:flutter/widgets.dart';
+import 'package:flutter_quill/extension/src/flutter_quill_embeds.dart';
 import 'package:meta/meta.dart' show experimental;
 
 import '../../controller/quill_controller.dart';
@@ -507,7 +509,11 @@ class QuillEditorConfigurations extends Equatable {
       keyboardAppearance: keyboardAppearance ?? this.keyboardAppearance,
       scrollPhysics: scrollPhysics ?? this.scrollPhysics,
       onLaunchUrl: onLaunchUrl ?? this.onLaunchUrl,
-      embedBuilders: embedBuilders ?? this.embedBuilders,
+      embedBuilders: embedBuilders == null
+          ? kIsWeb
+              ? FlutterQuillEmbeds.editorWebBuilders()
+              : FlutterQuillEmbeds.editorBuilders()
+          : null,
       unknownEmbedBuilder: unknownEmbedBuilder ?? this.unknownEmbedBuilder,
       searchConfigurations: searchConfigurations ?? this.searchConfigurations,
       customStyleBuilder: customStyleBuilder ?? this.customStyleBuilder,
