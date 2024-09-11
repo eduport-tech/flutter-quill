@@ -58,7 +58,7 @@ class QuillController extends ChangeNotifier {
   /// Caches configuration set in QuillEditor ctor.
   QuillEditorConfigurations? _editorConfigurations;
   QuillEditorConfigurations get editorConfigurations =>
-      _editorConfigurations ?? const QuillEditorConfigurations();
+      _editorConfigurations ?? QuillEditorConfigurations();
   set editorConfigurations(QuillEditorConfigurations? value) =>
       _editorConfigurations = document.editorConfigurations = value;
 

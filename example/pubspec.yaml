@@ -13,9 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.6
 
   # Flutter Quill Packages
-  flutter_quill: ^10.0.0
-  dart_quill_delta: ^10.0.0
-  flutter_quill_extensions: ^10.0.0
+  flutter_quill: 9.1.1
+  dart_quill_delta: 9.1.1
+  flutter_quill_extensions: 9.1.1
   flutter_quill_test: ^10.0.0
   # Dart Packages
   path: ^1.8.3
@@ -55,8 +55,6 @@ dependencies:
 dependency_overrides:
   flutter_quill:
     path: ../
-  flutter_quill_extensions:
-    path: ../flutter_quill_extensions
   dart_quill_delta:
     path: ../dart_quill_delta
   flutter_quill_test:

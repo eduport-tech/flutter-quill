@@ -26,7 +26,7 @@ void main() {
           home: QuillEditor.basic(
             controller: controller,
             // ignore: avoid_redundant_argument_values
-            configurations: const QuillEditorConfigurations(
+            configurations:  QuillEditorConfigurations(
                 // ignore: avoid_redundant_argument_values
                 ),
           ),
@@ -147,7 +147,7 @@ void main() {
           MaterialApp(
             home: QuillEditor.basic(
               controller: controller,
-              configurations: const QuillEditorConfigurations(),
+              configurations:  QuillEditorConfigurations(),
               focusNode: editorFocusNode,
             ),
           ),

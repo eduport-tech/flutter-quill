@@ -141,7 +141,7 @@ void main() {
               focusNode: FocusNode(),
               scrollController: ScrollController(),
               controller: controller,
-              configurations: const QuillEditorConfigurations(
+              configurations: QuillEditorConfigurations(
                 autoFocus: true,
                 expands: true,
               ),

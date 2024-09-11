@@ -254,7 +254,7 @@ class Document {
   /// Allows access to embedBuilders and search configurations
   QuillEditorConfigurations? _editorConfigurations;
   QuillEditorConfigurations get editorConfigurations =>
-      _editorConfigurations ?? const QuillEditorConfigurations();
+      _editorConfigurations ??  QuillEditorConfigurations();
   set editorConfigurations(QuillEditorConfigurations? value) =>
       _editorConfigurations = value;
   QuillSearchConfigurations get searchConfigurations =>

@@ -98,7 +98,7 @@ void main() {
       expect(document.search('2024'), [], reason: 'Does not search embeds');
 
       /// Test rawData mode
-      document.editorConfigurations = const QuillEditorConfigurations(
+      document.editorConfigurations =  QuillEditorConfigurations(
           searchConfigurations: QuillSearchConfigurations(
               searchEmbedMode: SearchEmbedMode.rawData));
       expect(document.search('18'), [7], reason: 'raw data finds timeStamp');
@@ -106,13 +106,13 @@ void main() {
       expect(document.search('08'), [5, 7],
           reason: 'raw data finds both embeds');
       //
-      document.editorConfigurations = const QuillEditorConfigurations(
+      document.editorConfigurations =  QuillEditorConfigurations(
           searchConfigurations: QuillSearchConfigurations(
               searchEmbedMode: SearchEmbedMode.plainText));
       expect(document.search('2024'), [], reason: 'No embed builders');
 
       /// Test plainText mode
-      document.editorConfigurations = const QuillEditorConfigurations(
+      document.editorConfigurations =  QuillEditorConfigurations(
         searchConfigurations: QuillSearchConfigurations(
             searchEmbedMode: SearchEmbedMode.plainText),
         embedBuilders: [
@@ -127,7 +127,7 @@ void main() {
           reason: 'image does not override toPlainText');
 
       /// Test unknownEmbedBuilder
-      document.editorConfigurations = const QuillEditorConfigurations(
+      document.editorConfigurations =  QuillEditorConfigurations(
           searchConfigurations: QuillSearchConfigurations(
               searchEmbedMode: SearchEmbedMode.plainText),
           embedBuilders: [

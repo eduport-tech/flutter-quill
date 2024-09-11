@@ -21,7 +21,7 @@ class QuillEditorProvider extends InheritedWidget {
     super.key,
   })  : editorConfigurations = editorConfigurations ??
             controller?.editorConfigurations ??
-            const QuillEditorConfigurations(),
+            QuillEditorConfigurations(),
         controller = controller ??
             // ignore: deprecated_member_use_from_same_package
             editorConfigurations?.controller ??
