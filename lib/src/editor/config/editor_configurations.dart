@@ -297,9 +297,10 @@ class QuillEditorConfigurations extends Equatable {
           LongPressEndDetails details, TextPosition Function(Offset offset))?
       onSingleLongTapEnd;
 
-  Iterable<EmbedBuilder>? embedBuilders = kIsWeb
-      ? FlutterQuillEmbeds.editorWebBuilders()
-      : FlutterQuillEmbeds.editorBuilders();
+  Iterable<EmbedBuilder>? embedBuilders;
+  // = kIsWeb
+  //     ? FlutterQuillEmbeds.editorWebBuilders()
+  //     : FlutterQuillEmbeds.editorBuilders();
   final EmbedBuilder? unknownEmbedBuilder;
   final CustomStyleBuilder? customStyleBuilder;
   final CustomRecognizerBuilder? customRecognizerBuilder;
