@@ -60,7 +60,7 @@ class ImageResizerState extends State<ImageResizer> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _widthSlider(),
+        // _widthSlider(),
         _heightSlider(),
       ],
     );
