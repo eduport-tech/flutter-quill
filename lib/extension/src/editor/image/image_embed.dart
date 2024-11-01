@@ -56,10 +56,12 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
         QuillSharedExtensionsConfigurations.get(context: context)
             .imageSaverService;
     return GestureDetector(
-      onTap: () {
+      onLongPress: () {
         final onImageClicked = configurations.onImageClicked;
         if (onImageClicked != null) {
+          moveToCursorPosition(controller, node.documentOffset);
           onImageClicked(imageSource);
+
           return;
         }
         showDialog(
@@ -89,4 +91,15 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
       ),
     );
   }
+}
+
+void moveToCursorPosition(QuillController controller, int offset) {
+  // Ensure the offset is within the bounds of the document
+  final clampedOffset = offset.clamp(0, controller.document.length - 1);
+
+  // Move the cursor to the specified position
+  controller.updateSelection(
+    TextSelection.collapsed(offset: clampedOffset),
+    ChangeSource.local,
+  );
 }

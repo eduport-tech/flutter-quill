@@ -4,12 +4,6 @@ import 'package:dart_quill_delta/dart_quill_delta.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'
-    show
-        GlobalCupertinoLocalizations,
-        GlobalMaterialLocalizations,
-        GlobalWidgetsLocalizations;
 import 'package:flutter_quill/extension/flutter_quill_extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart'
     show
@@ -21,20 +15,10 @@ import 'package:flutter_quill/flutter_quill.dart'
         QuillSimpleToolbar,
         QuillSimpleToolbarConfigurations,
         QuillToolbarCustomButtonOptions;
-import 'package:flutter_quill/translations.dart' show FlutterQuillLocalizations;
 import 'package:hydrated_bloc/hydrated_bloc.dart'
     show HydratedBloc, HydratedStorage;
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory;
-
-import 'screens/home/widgets/home_screen.dart';
-import 'screens/quill/quill_screen.dart';
-import 'screens/quill/samples/quill_default_sample.dart';
-import 'screens/quill/samples/quill_images_sample.dart';
-import 'screens/quill/samples/quill_text_sample.dart';
-import 'screens/quill/samples/quill_videos_sample.dart';
-import 'screens/settings/cubit/settings_cubit.dart';
-import 'screens/settings/widgets/settings_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,8 +27,7 @@ void main() async {
         ? HydratedStorage.webStorageDirectory
         : await getApplicationDocumentsDirectory(),
   );
-  FlutterQuillExtensions.useSuperClipboardPlugin();
-  runApp(MyApp());
+  runApp(MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -53,6 +36,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Quill Demo'),
+      ),
       body: Column(
         children: [
           QuillSimpleToolbar(
@@ -91,7 +77,7 @@ class MyApp extends StatelessWidget {
                 showSuperscript: false,
                 customButtons: [
                   QuillToolbarCustomButtonOptions(
-                    icon: Icon(Icons.image),
+                    icon: const Icon(Icons.image),
                     onPressed: () {
                       _pickImage();
                     },
@@ -103,9 +89,9 @@ class MyApp extends StatelessWidget {
               configurations: QuillEditorConfigurations(
                 controller: _controller,
                 showCursor: true,
-                // embedBuilders: kIsWeb
-                //     ? FlutterQuillEmbeds.editorWebBuilders()
-                //     : FlutterQuillEmbeds.editorBuilders(),
+                embedBuilders: kIsWeb
+                    ? FlutterQuillEmbeds.editorWebBuilders()
+                    : FlutterQuillEmbeds.editorBuilders(),
               ),
             ),
           )
@@ -116,39 +102,36 @@ class MyApp extends StatelessWidget {
 
   // Method to pick an image from the device's gallery
   Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
+    final picker = ImagePicker();
 
     // Use ImagePicker to select an image from the gallery
-    final XFile? pickedImage =
-        await picker.pickImage(source: ImageSource.gallery);
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
 
     // Check if an image was successfully picked
     if (pickedImage != null) {
-      // Extract the file path of the picked image
-      final String imagePath = pickedImage.path;
       // Create a File object from the picked image path
-      final File file = File(imagePath);
-
+      final file = File(pickedImage.path);
+      _controller.insertImageBlock(imageSource: file.path);
       // Create a Delta representing the image to insert into the editor
-      final Delta imageDelta = Delta()
-        // Insert a new line before the image
-        ..insert("\n")
-        // Insert the image data as a map
-        ..insert({
-          // 'image' key represents the image data, in this case, the file path
-          'image': file.path.toString(),
-        })
-        // Insert a new line after the image
-        ..insert("\n");
+      // final Delta imageDelta = Delta()
+      //   // Insert a new line before the image
+      //   ..insert("\n")
+      //   // Insert the image data as a map
+      //   ..insert({
+      //     // 'image' key represents the image data, in this case, the file path
+      //     'image': file.path.toString(),
+      //   })
+      //   // Insert a new line after the image
+      //   ..insert("\n");
 
-      // Compose the image Delta into the Quill controller
-      _controller.compose(
-        imageDelta, // Delta representing the image
-        // Set the text selection to the end of the inserted image
-        TextSelection.collapsed(offset: imageDelta.length),
-        // Specify that the change was made locally
-        ChangeSource.local,
-      );
+      // // Compose the image Delta into the Quill controller
+      // _controller.compose(
+      //   imageDelta, // Delta representing the image
+      //   // Set the text selection to the end of the inserted image
+      //   TextSelection.collapsed(offset: imageDelta.length),
+      //   // Specify that the change was made locally
+      //   ChangeSource.local,
+      // );
     }
   }
 }

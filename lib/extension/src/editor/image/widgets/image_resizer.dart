@@ -69,10 +69,10 @@ class ImageResizerState extends State<ImageResizer> {
   Widget _showCupertinoMenu() {
     return CupertinoActionSheet(
       actions: [
-        CupertinoActionSheetAction(
-          onPressed: () {},
-          child: _widthSlider(),
-        ),
+        // CupertinoActionSheetAction(
+        //   onPressed: () {},
+        //   child: _widthSlider(),
+        // ),
         CupertinoActionSheetAction(
           onPressed: () {},
           child: _heightSlider(),
