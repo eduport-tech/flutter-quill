@@ -153,30 +153,39 @@ class ImageOptionsMenu extends StatelessWidget {
 
                 messenger.clearSnackBars();
 
-                if (!imageSavedSuccessfully) {
+                if (imageSavedSuccessfully) {
+                  messenger.showSnackBar(const SnackBar(
+                    content: Text(
+                      'Image saved successfully',
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                  ));
+                } else {
                   messenger.showSnackBar(SnackBar(
-                      content: Text(
-                    localizations.errorWhileSavingImage,
-                  )));
+                    content: Text(
+                      localizations.errorWhileSavingImage,
+                    ),
+                    behavior: SnackBarBehavior.floating,
+                  ));
                   return;
                 }
 
-                var message = switch (saveImageResult.method) {
-                  SaveImageResultMethod.network =>
-                    localizations.savedUsingTheNetwork,
-                  SaveImageResultMethod.localStorage =>
-                    localizations.savedUsingLocalStorage,
-                };
+                // var message = switch (saveImageResult.method) {
+                //   SaveImageResultMethod.network =>
+                //     localizations.savedUsingTheNetwork,
+                //   SaveImageResultMethod.localStorage =>
+                //     localizations.savedUsingLocalStorage,
+                // };
 
-                // if (isDesktopApp) {
-                //   message = localizations.theImageHasBeenSavedAt(imageSource);
-                // }
+                // // if (isDesktopApp) {
+                // //   message = localizations.theImageHasBeenSavedAt(imageSource);
+                // // }
 
-                messenger.showSnackBar(
-                  SnackBar(
-                    content: Text(message),
-                  ),
-                );
+                // messenger.showSnackBar(
+                //   SnackBar(
+                //     content: Text(message),
+                //   ),
+                // );
               },
             ),
           ListTile(

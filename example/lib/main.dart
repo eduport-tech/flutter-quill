@@ -1,14 +1,10 @@
 import 'dart:io';
 
-import 'package:dart_quill_delta/dart_quill_delta.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_quill/extension/flutter_quill_extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart'
     show
-        ChangeSource,
-        Document,
         QuillController,
         QuillEditor,
         QuillEditorConfigurations,
@@ -17,6 +13,7 @@ import 'package:flutter_quill/flutter_quill.dart'
         QuillToolbarCustomButtonOptions;
 import 'package:hydrated_bloc/hydrated_bloc.dart'
     show HydratedBloc, HydratedStorage;
+import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory;
 
@@ -78,9 +75,7 @@ class MyApp extends StatelessWidget {
                 customButtons: [
                   QuillToolbarCustomButtonOptions(
                     icon: const Icon(Icons.image),
-                    onPressed: () {
-                      _pickImage();
-                    },
+                    onPressed: _pickImage,
                   ),
                 ]),
           ),
