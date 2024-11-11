@@ -158,12 +158,11 @@ class ImageOptionsMenu extends StatelessWidget {
                   Fluttertoast.showToast(
                     msg: 'Image saved successfully',
                   );
+                  return;
                 } else {
-                  messenger.showSnackBar(SnackBar(
-                    content: Text(
-                      localizations.errorWhileSavingImage,
-                    ),
-                  ));
+                  Fluttertoast.showToast(
+                    msg: localizations.errorWhileSavingImage,
+                  );
                   return;
                 }
 
