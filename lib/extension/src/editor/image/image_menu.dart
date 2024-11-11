@@ -5,6 +5,7 @@ import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart'
     show ImageUrl, QuillController, StyleAttribute, getEmbedNode;
 import 'package:flutter_quill/translations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:super_clipboard/super_clipboard.dart';
 
 import '../../common/utils/element_utils/element_utils.dart';
@@ -154,18 +155,14 @@ class ImageOptionsMenu extends StatelessWidget {
                 messenger.clearSnackBars();
 
                 if (imageSavedSuccessfully) {
-                  messenger.showSnackBar(const SnackBar(
-                    content: Text(
-                      'Image saved successfully',
-                    ),
-                    behavior: SnackBarBehavior.floating,
-                  ));
+                  Fluttertoast.showToast(
+                    msg: 'Image saved successfully',
+                  );
                 } else {
                   messenger.showSnackBar(SnackBar(
                     content: Text(
                       localizations.errorWhileSavingImage,
                     ),
-                    behavior: SnackBarBehavior.floating,
                   ));
                   return;
                 }
