@@ -81,12 +81,19 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
       child: Builder(
         builder: (context) {
           if (margin != null) {
-            return Padding(
-              padding: EdgeInsets.all(margin),
-              child: image,
+            return Container(
+              color: Colors.grey.shade200,
+              child: Padding(
+                padding: EdgeInsets.all(margin),
+                child: image,
+              ),
             );
           }
-          return image;
+          return Container(
+              // margin: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
+              color: Colors.grey.shade200,
+              child: image);
         },
       ),
     );
