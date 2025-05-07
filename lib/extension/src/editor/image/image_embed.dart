@@ -40,6 +40,10 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
     final width = imageSize.width;
     final height = imageSize.height;
 
+    // Check if this image is currently selected
+    final isSelected = controller.selection.baseOffset <= node.documentOffset && 
+                       node.documentOffset < controller.selection.extentOffset;
+
     final image = getImageWidgetByImageSource(
       context: context,
       imageSource,
@@ -55,15 +59,22 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
     final imageSaverService =
         QuillSharedExtensionsConfigurations.get(context: context)
             .imageSaverService;
+            
     return GestureDetector(
+      onTap: () {
+        // Set selection to this image when tapped
+        moveToCursorPosition(controller, node.documentOffset);
+      },
       onLongPress: () {
+        // Ensure cursor position is set to this image before showing menu
+        moveToCursorPosition(controller, node.documentOffset);
+        
         final onImageClicked = configurations.onImageClicked;
         if (onImageClicked != null) {
-          moveToCursorPosition(controller, node.documentOffset);
           onImageClicked(imageSource);
-
           return;
         }
+        
         showDialog(
           context: context,
           builder: (_) => FlutterQuillLocalizationsWidget(
@@ -74,26 +85,42 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
               imageSize: imageSize,
               isReadOnly: readOnly,
               imageSaverService: imageSaverService,
+              nodeOffset: node.documentOffset,
             ),
           ),
         );
       },
       child: Builder(
         builder: (context) {
+          // Create a container with a highlight border if selected
+          Widget imageWidget = image;
+          
+          // Add a colored border when the image is selected
+          if (isSelected) {
+            imageWidget = Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2.0,
+                ),
+              ),
+              child: image,
+            );
+          }
+          
           if (margin != null) {
             return Container(
               color: Colors.grey.shade200,
               child: Padding(
                 padding: EdgeInsets.all(margin),
-                child: image,
+                child: imageWidget,
               ),
             );
           }
           return Container(
-              // margin: const EdgeInsets.all(8),
               padding: const EdgeInsets.all(8),
               color: Colors.grey.shade200,
-              child: image);
+              child: imageWidget);
         },
       ),
     );

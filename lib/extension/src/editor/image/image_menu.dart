@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart'
-    show ImageUrl, QuillController, StyleAttribute, getEmbedNode;
+    show ChangeSource, ImageUrl, QuillController, StyleAttribute, getEmbedNode;
 import 'package:flutter_quill/translations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:super_clipboard/super_clipboard.dart';
@@ -25,6 +25,7 @@ class ImageOptionsMenu extends StatelessWidget {
     required this.imageSize,
     required this.isReadOnly,
     required this.imageSaverService,
+    this.nodeOffset,
     super.key,
   });
 
@@ -34,6 +35,8 @@ class ImageOptionsMenu extends StatelessWidget {
   final ElementSize imageSize;
   final bool isReadOnly;
   final ImageSaverService imageSaverService;
+  /// The document offset of the image node, used to ensure we delete the correct image
+  final int? nodeOffset;
 
   @override
   Widget build(BuildContext context) {
@@ -123,16 +126,28 @@ class ImageOptionsMenu extends StatelessWidget {
                   return;
                 }
 
-                final offset = getEmbedNode(
-                  controller,
-                  controller.selection.start,
-                ).offset;
+                // Use the provided nodeOffset if available, otherwise fallback to selection
+                final offset = nodeOffset != null
+                    ? nodeOffset!
+                    : getEmbedNode(
+                        controller,
+                        controller.selection.start,
+                      ).offset;
+                
+                // Ensure the cursor is positioned at the image before deleting
+                controller.updateSelection(
+                  TextSelection.collapsed(offset: offset),
+                  ChangeSource.local,
+                );
+                
+                // Delete the image at the specified offset
                 controller.replaceText(
                   offset,
                   1,
                   '',
                   TextSelection.collapsed(offset: offset),
                 );
+                
                 // Call the post remove callback if set
                 await configurations.onImageRemovedCallback.call(imageSource);
               },
