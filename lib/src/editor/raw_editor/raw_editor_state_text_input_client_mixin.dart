@@ -92,13 +92,16 @@ mixin RawEditorStateTextInputClientMixin on EditorState
                               _lastKnownRemoteTextEditingValue!.text.length));
         }
       }
-      
+
       // Use a post-frame callback to ensure the connection is fully established
       // before setting the initial editing state, which helps with backspace issues
       // on first open
-      SchedulerBinding.instance.addPostFrameCallback((_) {
+      SchedulerBinding.instance.addPostFrameCallback((_) async {
+        // Add a small delay to ensure everything is ready
+        await Future.delayed(const Duration(milliseconds: 50));
         if (hasConnection) {
-          _textInputConnection!.setEditingState(_lastKnownRemoteTextEditingValue!);
+          _textInputConnection!
+              .setEditingState(_lastKnownRemoteTextEditingValue!);
         }
       });
     }
