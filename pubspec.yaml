@@ -49,6 +49,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_quill_delta_from_html: ^1.4.1
+  fluttertoast: ^8.2.8
   gal: ^2.3.0
   html: ^0.15.4
   image_picker: ^1.1.2
@@ -59,8 +60,7 @@ dependencies:
   quiver: ^3.2.1
   super_clipboard: ^0.8.5
   universal_html: ^2.2.4
-  url_launcher: ^6.2.4
-  fluttertoast: ^8.2.8
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_lints: ^4.0.0
