@@ -181,6 +181,11 @@ mixin RawEditorStateTextInputClientMixin on EditorState
   @override
   AutofillScope? get currentAutofillScope => null;
 
+  // Added in Flutter 3.44 (TextInputClient.onFocusReceived). The editor manages
+  // its own focus, so no special handling is required here.
+  @override
+  bool onFocusReceived() => false;
+
   @override
   void updateEditingValue(TextEditingValue value) {
     if (!shouldCreateInputConnection) {
